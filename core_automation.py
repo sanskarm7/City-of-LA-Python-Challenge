@@ -5,7 +5,7 @@
 
 import asyncio
 from playwright.async_api import async_playwright
-from utils import safe_goto, safe_click, safe_fill, safe_get_text
+from utils import safe_goto, safe_click, safe_fill, safe_get_text, see_page_elements
 import config
 
 class BrowserAutomation:
@@ -49,6 +49,40 @@ class BrowserAutomation:
         print("[Search] Search completed!\n")
         return True
     
+    async def get_first_product_info(self):
+        """ get the name and price of the first product in results """
+        print("[Extract] Getting product information...")
+        
+        # inspection shows that product title is found in an h2 specifically in the product result
+        # price is in a span with class "a-price-whole"
+        product_name = None
+        name_selector = "[data-component-type='s-search-result'] h2"
+        
+        product_name = await safe_get_text(self.page, name_selector)
+        if product_name and product_name.strip():
+            print(f"[Extract] Found name using selector: {name_selector}")
+        else: 
+            print("[Extract] Could not find product name")
+            return None
+        
+        product_price = None
+        price_selector = ".a-price-whole"
+        
+        product_price = await safe_get_text(self.page, price_selector)
+        if not product_price:
+            print("[Extract] Could not find product price")
+            return None
+        
+        result = {
+            "name": product_name.strip(),
+            "price": product_price.strip()
+        }
+        
+        print(f"[Extract] Found product: {result['name']}") 
+        print(f"[Extract] Price: ${result['price']}")
+        
+        return result
+     
     async def cleanup(self):
         """ close the browser """
         print("\n[Cleanup] Closing browser...")
@@ -57,4 +91,17 @@ class BrowserAutomation:
         if self.playwright:
             await self.playwright.stop()
         print("[Cleanup] Done\n")
+
+    # dev assistance functions for debugging
+    async def debug_current_page(self):
+        """ helper to see what's on the page - useful for finding selectors """
+        print("\n" + "="*60)
+        print("DEBUG: What's on this page?")
+        print("="*60)
+        
+        # look for matching elements on the page
+        await see_page_elements(self.page, "h2")
+        await see_page_elements(self.page, ".a-price-whole")
+        
+        print("="*60 + "\n")
 

@@ -57,10 +57,55 @@ async def test_amazon_search():
         print(f"\n[Result] TEST FAILED: {e}\n")
 
 
+async def test_amazon_search_and_get_info():
+    """ test searching for a product on amazon and gettings product info """
+    print("="*60)
+    print("TEST 3: Amazon Product Search and Get Info")
+    print("="*60)
+    
+    automation = BrowserAutomation()
+    
+    try:
+        await automation.setup()
+        
+        success = await automation.search_amazon("t-rex dinosaur toy")
+        
+        if success:
+            print("[Test] Search worked!")
+            
+            # now we try and get the product info (we'll just do first one)
+            product = await automation.get_first_product_info()
+            
+            if product:
+                print(f"\n[Test] Successfully extracted product!")
+                print("\n[Test] Product Info: ")
+                print(f"Name: {product['name']}")
+                print(f"Price: ${product['price']}\n")
+            else:
+                print("[Test] Failed to extract product info")
+                success = False
+
+            await asyncio.sleep(5)
+        else:
+            print("[Test] Search failed!")
+        
+        await automation.cleanup()
+        
+        if success:
+            print("\n[Result] TEST PASSED!\n")
+        else:
+            print("\n[Result] TEST FAILED!\n")
+            
+    except Exception as e:
+        print(f"\n[Result] TEST FAILED: {e}\n")
+
+
+
 async def run_all_tests():
     """Run all available tests"""
     await test_basic_setup()
     await test_amazon_search()
+    await test_amazon_search_and_get_info()
 
 if __name__ == "__main__":
     print("\nRunning tests...\n")

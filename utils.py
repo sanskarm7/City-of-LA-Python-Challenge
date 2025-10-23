@@ -45,3 +45,20 @@ async def safe_get_text(page, selector, timeout=10000):
         print(f"[Failure] failed to get text from {selector}: {e}")
         return None
 
+
+async def see_page_elements(page, selector):
+    """find and print elements that match a selector"""
+    try:
+        elements = await page.query_selector_all(selector)
+        print(f"\n[Debug] Found {len(elements)} elements matching '{selector}'")
+        
+        for i, elem in enumerate(elements[:10]):  # Show first 10
+            text = await elem.text_content()
+            text = text.strip()[:100] if text else "(no text)"
+            print(f"  [{i+1}] {text}")
+        
+        return len(elements)
+    except Exception as e:
+        print(f"[Debug] Error: {e}")
+        return 0
+
