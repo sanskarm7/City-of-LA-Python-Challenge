@@ -1,5 +1,5 @@
 # growing tests for core automation 
-# run with: python3 test.py
+# run with: python3 main_test.py
 
 import asyncio
 from core_automation import BrowserAutomation
@@ -42,7 +42,7 @@ async def test_amazon_search():
         if success:
             print("[Test] Search worked!")
 
-            await asyncio.sleep(10) # this one is longer so we can see the results
+            await asyncio.sleep(5) # this one is longer so we can see the results
         else:
             print("[Test] Search failed!")
         
@@ -85,7 +85,7 @@ async def test_amazon_search_and_get_info():
                 print("[Test] Failed to extract product info")
                 success = False
 
-            await asyncio.sleep(5)
+            await asyncio.sleep(2)
         else:
             print("[Test] Search failed!")
         
