@@ -1,0 +1,14 @@
+# dependencies for browser automation
+playwright==1.48.0
+
+# config management
+python-dotenv==1.0.0
+
+# prepare for optional challenge 1 with anthropic
+anthropic==0.39.0
+
+# potentially will use these later for challenge 2
+fastapi==0.115.0
+uvicorn==0.32.0
+pydantic==2.9.2
+
