@@ -8,6 +8,9 @@ from core_automation import BrowserAutomation
 # for a product like a "Google Home", you'll see results that push Amazon's 
 # product, and that messes up the parsing. As a result, we can try to use AI
 # to help us find the correct product. (optional challenge 1)
+
+# i am aware that the required cord challenge mentioned searching for a specific product.
+# i tried sticking to this through the testing suite in main_test.py
 async def main():
     """ complete demo of the automation """
     print("\n" + "="*60)
