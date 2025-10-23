@@ -5,7 +5,8 @@ playwright==1.48.0
 python-dotenv==1.0.0
 
 # prepare for optional challenge 1 with anthropic
-anthropic==0.39.0
+anthropic==0.34.0
+httpx==0.27.0
 
 # potentially will use these later for challenge 2
 fastapi==0.115.0

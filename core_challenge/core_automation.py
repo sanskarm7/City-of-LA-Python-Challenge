@@ -4,6 +4,10 @@
 # unfortunately, i cannot think of a way to simulate "logging in"
 
 import asyncio
+import sys
+from pathlib import Path
+sys.path.append(str(Path(__file__).parent.parent))
+
 from playwright.async_api import async_playwright
 from utils import safe_goto, safe_click, safe_fill, safe_get_text, see_page_elements
 import config
