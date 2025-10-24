@@ -79,8 +79,6 @@ This challenge uses an claude agent and MCP to make browswer automation intellig
 - Executes each step using our safe automation utilities
 - Handles errors and continues execution
 
-#### Why This Matters:
-
 **Traditional Automation (Required Core):**
 ```python
 # fixed steps
