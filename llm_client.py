@@ -18,7 +18,7 @@ class LLMClient:
             raise ValueError("ANTHROPIC_API_KEY not set in .env file")
         
         self.client = Anthropic(api_key=config.ANTHROPIC_API_KEY)
-        self.model = "claude-3-5-sonnet-20241022"
+        self.model = "claude-haiku-4-5-20251001" 
     
     def generate_plan(self, goal, page_context):
         """
